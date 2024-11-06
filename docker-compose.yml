@@ -1,0 +1,22 @@
+﻿services:
+  shilka.wallet.grpc:
+    image: shilka.wallet.grpc
+    build:
+      context: .
+      dockerfile: Shilka.Wallet.GRPC/Dockerfile
+    environment:
+      DB_CONNECTION_STRING: "Host=${DB_HOST};Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASS};"
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

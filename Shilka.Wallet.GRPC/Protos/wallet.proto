@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option csharp_namespace = "Shilka.Wallet.GRPC";
+
+package wallet;
+
+service Wallet {
+  rpc GetWalletByUserId (GetWalletByUserIdRequest) returns (GetWalletByUserIdReply);
+  rpc GetAllWallets(GetAllWalletsRequest) returns (GetAllWalletsReply);
+  rpc SendCoins(SendCoinsRequest) returns (DefaultResult);
+  rpc GiveCoins (DefaultCoinOperations) returns (DefaultResult);
+  rpc TakeCoins (DefaultCoinOperations) returns (DefaultResult);
+}
+
+message DefaultWallet {
+  int64 userId = 1;
+  string amount = 2;
+}
+
+message DefaultCoinOperations {
+  int64 userId = 1;
+  string amount = 2;
+}
+
+message DefaultResult {
+  bool IsOk = 1;
+}
+
+message SendCoinsRequest {
+  int64 fromId = 1;
+  int64 toId = 2;
+  string amount = 3;
+}
+
+message GetWalletByUserIdRequest {
+  int64 userId = 1;
+}
+
+message GetWalletByUserIdReply {
+  DefaultWallet wallet = 1;
+}
+
+message GetAllWalletsRequest {
+}
+
+message GetAllWalletsReply {
+  repeated DefaultWallet wallets = 1;
+}
