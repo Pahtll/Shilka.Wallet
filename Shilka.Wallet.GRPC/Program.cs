@@ -13,10 +13,11 @@ var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
 var dbUser = Environment.GetEnvironmentVariable("DB_USER");
 var dbPass = Environment.GetEnvironmentVariable("DB_PASS");
 var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+var dbPort = Environment.GetEnvironmentVariable("DB_PORT");
 
 builder.Services.AddGrpc();
 
-var connectionString = $"Host={dbHost};Database={dbName};Username={dbUser};Password={dbPass}";
+var connectionString = $"Host={dbHost};Database={dbName};Username={dbUser};Password={dbPass};Port={dbPort}";
 builder.Services.AddDbContext<ShilkaWalletDbContext>(options =>
 	options.UseNpgsql(connectionString));
 
