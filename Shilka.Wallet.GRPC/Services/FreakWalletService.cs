@@ -134,4 +134,24 @@ public class FreakWalletService(
 			throw new RpcException(new Status(StatusCode.Internal, e.Message));
 		}
 	}
+
+	public override async Task<DefaultResult> CreateFreakWallet(NewUserId request, ServerCallContext context)
+	{
+		try
+		{
+			await walletRepository.CreateFreakWallet(request.UserId);
+
+			return new DefaultResult { IsOk = true };
+		}
+		catch (ArgumentException e)
+		{
+			logger.LogError("Error: {e.Message}", e.Message);
+			throw new RpcException(new Status(StatusCode.InvalidArgument, e.Message));
+		}
+		catch (Exception e)
+		{
+			logger.LogError("Error: {e.Message}", e.Message);
+			throw new RpcException(new Status(StatusCode.Internal, e.Message));
+		}
+	}
 }

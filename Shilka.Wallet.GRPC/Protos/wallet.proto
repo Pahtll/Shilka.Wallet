@@ -10,6 +10,7 @@ service Wallet {
   rpc SendCoins(SendCoinsRequest) returns (DefaultResult);
   rpc GiveCoins (DefaultCoinOperations) returns (DefaultResult);
   rpc TakeCoins (DefaultCoinOperations) returns (DefaultResult);
+  rpc CreateFreakWallet (NewUserId) returns (DefaultResult);
 }
 
 message DefaultWallet {
@@ -24,6 +25,10 @@ message DefaultCoinOperations {
 
 message DefaultResult {
   bool IsOk = 1;
+}
+
+message NewUserId {
+  int64 userId = 1;
 }
 
 message SendCoinsRequest {
